@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package getmearidex;
+package entity;
 
 /**
  *
@@ -15,8 +15,8 @@ public class Pessoa {
     private String endereço;
     private String Telefone;
     private String email;
-    private String placa;
     private String senha;
+    private String confirmarSenha;
 
     /**
      * @return the nome
@@ -75,20 +75,6 @@ public class Pessoa {
     }
 
     /**
-     * @return the placa
-     */
-    public String getPlaca() {
-        return placa;
-    }
-
-    /**
-     * @param placa the placa to set
-     */
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
-
-    /**
      * @return the senha
      */
     public String getSenha() {
@@ -98,8 +84,22 @@ public class Pessoa {
     /**
      * @param senha the senha to set
      */
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha(char[] senha) {
+        this.senha = senha.toString();
+    }
+
+    /**
+     * @return the confirmarSenha
+     */
+    public String getConfirmarSenha() {
+        return confirmarSenha;
+    }
+
+    /**
+     * @param confirmarSenha the confirmarSenha to set
+     */
+    public void setConfirmarSenha(char[] confirmarSenha) {
+        this.confirmarSenha = confirmarSenha.toString();
     }
     
     

@@ -1,4 +1,4 @@
-package getmearidex;
+package dao;
 
 
 import java.sql.Statement;

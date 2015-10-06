@@ -1,5 +1,8 @@
-package getmearidex;
+package ui;
 
+import dao.ConnectBD;
+import entity.Taxista;
+import dao.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -13,20 +16,20 @@ import javax.swing.text.MaskFormatter;
 
 /*
 
-* Data: 09 de Setembro de 2015
-* Projeto: Get me a ride
-* Disciplina: Engenharia de Software
-* Sprint 1
-* Classe: Cadastro Taxista
-* 
-Integrantes do Grupo:
-* 
-* Murilo Augusto
-* Ricardo Corassa
-* Weslley Martins
-* Edmar
+ * Data: 09 de Setembro de 2015
+ * Projeto: Get me a ride
+ * Disciplina: Engenharia de Software
+ * Sprint 1
+ * Classe: Cadastro Taxista
+ * 
+ Integrantes do Grupo:
+ * 
+ * Murilo Augusto
+ * Ricardo Corassa
+ * Weslley Martins
+ * Edmar
 
-*/
+ */
 public class CadastroTaxista extends javax.swing.JFrame {
 
     /**
@@ -208,7 +211,7 @@ public class CadastroTaxista extends javax.swing.JFrame {
                                 .addComponent(placaCampo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(enderecoCampo, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(nomeCampo, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -257,86 +260,86 @@ public class CadastroTaxista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
-      
-        char[] senha = senhaCampo.getPassword();
-        String Password = new String(senha); 
-        char[] senha2 = confirmarSenhaCampo.getPassword();
-        String Password2 = new String(senha2); 
-        int teste = 1;
-         
-         try {
-           
-           Connection con = ConnectBD.getConnnection();
-           // Validação do campo Nome
-           if (nomeCampo.getText().equals(""))
-           {
-           JOptionPane.showMessageDialog(null,"Digite um nome");
-           teste = 0;
-           }
-            // Validação do campo Endereço
-           if (enderecoCampo.getText().equals(""))
-           {
-           JOptionPane.showMessageDialog(null,"Digite um endereço");
-           teste = 0;
-           }
-            // Validação do campo telefone
-           if (telefoneCampo.getText().equals("(  )     -    "))
-           {
-           JOptionPane.showMessageDialog(null,"Digite um telefone");
-           teste = 0;
-           }
-           
-             // Validação do campo Email
-           if (emailCampo.getText().equals(""))
-           {
-           JOptionPane.showMessageDialog(null,"Digite um email");
-           teste = 0;
-           }
+
+        try {
+
+            Taxista taxista = new Taxista();
             
-             // Validação do campo Placa
-           if (placaCampo.getText().equals("   -    "))
-           {
-           JOptionPane.showMessageDialog(null,"Digite uma placa");
-           teste = 0;
-           }
-             // Validação do campo Senha
-           if (senhaCampo.getText().equals("") || confirmarSenhaCampo.getText().equals("") || (!(Password.equals(Password2))) )
-           {
-               if (!(Password.equals(Password2))){
-                JOptionPane.showMessageDialog(null,"Senhas Diferentes");
+            taxista.setNome(nomeCampo.getText());
+            taxista.setEndereço(enderecoCampo.getText());
+            taxista.setTelefone(telefoneCampo.getText());
+            taxista.setEmail(emailCampo.getText());
+            taxista.setPlaca(placaCampo.getText());
+            taxista.setSenha(senhaCampo.getPassword());
+            taxista.setConfirmarSenha(confirmarSenhaCampo.getPassword());
+            
+            TaxistaDAO taxistaDAO = new TaxistaDAO();
+            
+            Connection con = ConnectBD.getConnnection();
+            /*// Validação do campo Nome
+            if (nomeCampo.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Digite um nome");
                 teste = 0;
-               } 
-               else
-               {
-               JOptionPane.showMessageDialog(null,"Digite uma senha válida");
-               teste = 0;
-               }
-           }          
-          
-               
+            }
+            // Validação do campo Endereço
+            if (enderecoCampo.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Digite um endereço");
+                teste = 0;
+            }
+            // Validação do campo telefone
+            if (telefoneCampo.getText().equals("(  )     -    ")) {
+                JOptionPane.showMessageDialog(null, "Digite um telefone");
+                teste = 0;
+            }
+
+            // Validação do campo Email
+            if (emailCampo.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Digite um email");
+                teste = 0;
+            }
+
+            // Validação do campo Placa
+            if (placaCampo.getText().equals("   -    ")) {
+                JOptionPane.showMessageDialog(null, "Digite uma placa");
+                teste = 0;
+            }
+            // Validação do campo Senha
+            if (senhaCampo.getText().equals("") || confirmarSenhaCampo.getText().equals("") || (!(Password.equals(Password2)))) {
+                if (!(Password.equals(Password2))) {
+                    JOptionPane.showMessageDialog(null, "Senhas Diferentes");
+                    teste = 0;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Digite uma senha válida");
+                    teste = 0;
+                }
+            }*/
+
             //cria string para inserir no BD
-           if (teste ==1){
-           String query = "INSERT INTO cadastro (nome,endereco,email,telefone,placa,senha) VALUES (?,?,?,?,?,?)";
-      
-           PreparedStatement stmt = con.prepareStatement(query);
-           stmt.setString(1, nomeCampo.getText());
-            stmt.setString(2, enderecoCampo.getText());
-            stmt.setString(3, emailCampo.getText());
-            stmt.setString(4, telefoneCampo.getText());
-            stmt.setString(5, placaCampo.getText());
-            stmt.setString(6, senhaCampo.getText());
-            
-            stmt.executeUpdate(); 
-            //fecha comando conexão
-            stmt.close();  
-            con.close();
-            JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso");
-           }
-        }  catch (SQLException e){
-            System.err.println("Ocorreu erro de SQL:" +e.getMessage());
+            if (!taxistaDAO.ehValidoParaInclusão(taxista).isEmpty()) {
+                
+                String query = "INSERT INTO cadastro (nome,endereco,email,telefone,placa,senha) VALUES (?,?,?,?,?,?)";
+
+                PreparedStatement stmt = con.prepareStatement(query);
+                stmt.setString(1, nomeCampo.getText());
+                stmt.setString(2, enderecoCampo.getText());
+                stmt.setString(3, emailCampo.getText());
+                stmt.setString(4, telefoneCampo.getText());
+                stmt.setString(5, placaCampo.getText());
+                stmt.setString(6, senhaCampo.getText());
+
+                stmt.executeUpdate();
+                //fecha comando conexão
+                stmt.close();
+                con.close();
+                JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso");
+            }else{
+                JOptionPane.showMessageDialog(null,taxistaDAO.ehValidoParaInclusão(taxista));
+            }
+        } catch (SQLException e) {
+            System.err.println("Ocorreu erro de SQL:" + e.getMessage());
             throw new RuntimeException(e);
         }
-        
+
     }//GEN-LAST:event_confirmarActionPerformed
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
@@ -346,7 +349,7 @@ public class CadastroTaxista extends javax.swing.JFrame {
         emailCampo.setText(null);
         telefoneCampo.setText(null);
         placaCampo.setText(null);
-        senhaCampo.setText(null);   
+        senhaCampo.setText(null);
         confirmarSenhaCampo.setText(null);
     }//GEN-LAST:event_limparActionPerformed
 
@@ -354,9 +357,8 @@ public class CadastroTaxista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_telefoneCampoActionPerformed
 
-   
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {

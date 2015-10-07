@@ -34,8 +34,8 @@ public class TaxistaDAO {
         if (taxista.getEndereço().equals("")) {
             erros.add("Endereço inválido");
         }
-
-        if (taxista.getPlaca().equals("   -    ")) {
+        
+        if (taxista.getPlaca().equals("   -    ") ) {
             erros.add("Placa inválida");
         }
 

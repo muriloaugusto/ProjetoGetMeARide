@@ -5,6 +5,7 @@ import entity.Taxista;
 import dao.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /*
@@ -54,8 +56,8 @@ public class CadastroTaxista extends javax.swing.JFrame {
         telefoneTexto = new javax.swing.JLabel();
         emailTexto = new javax.swing.JLabel();
         placaTexto = new javax.swing.JLabel();
-        confirmar = new javax.swing.JButton();
-        limpar = new javax.swing.JButton();
+        Criar = new javax.swing.JButton();
+        Limpar = new javax.swing.JButton();
         nomeCampo = new javax.swing.JTextField();
         enderecoCampo = new javax.swing.JTextField();
         telefoneCampo = new javax.swing.JTextField();
@@ -82,6 +84,13 @@ public class CadastroTaxista extends javax.swing.JFrame {
         cadastroTaxistaTexto = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        Editar = new javax.swing.JButton();
+        Excluir = new javax.swing.JButton();
+        Buscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        Pesquisar = new javax.swing.JTextField();
+        txtLabel = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -108,17 +117,17 @@ public class CadastroTaxista extends javax.swing.JFrame {
 
         placaTexto.setText("Placa:");
 
-        confirmar.setText("Confirmar");
-        confirmar.addActionListener(new java.awt.event.ActionListener() {
+        Criar.setText("Criar");
+        Criar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmarActionPerformed(evt);
+                CriarActionPerformed(evt);
             }
         });
 
-        limpar.setText("Limpar");
-        limpar.addActionListener(new java.awt.event.ActionListener() {
+        Limpar.setText("Limpar");
+        Limpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limparActionPerformed(evt);
+                LimparActionPerformed(evt);
             }
         });
 
@@ -177,6 +186,49 @@ public class CadastroTaxista extends javax.swing.JFrame {
                 .addComponent(jLabel1))
         );
 
+        Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
+
+        Excluir.setText("Excluir");
+        Excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluirActionPerformed(evt);
+            }
+        });
+
+        Buscar.setText("Pesquisar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Endereço", "Telefone", "E-mail", "Placa"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        Pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PesquisarActionPerformed(evt);
+            }
+        });
+
+        txtLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtLabel.setText("Digite a placa:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,16 +236,14 @@ public class CadastroTaxista extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(107, 107, 107)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(senhaTexto)
-                            .addComponent(confirmarSenhaTexto)
-                            .addComponent(confirmar))
-                        .addGap(18, 18, 18)
+                            .addComponent(confirmarSenhaTexto))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(limpar)
-                            .addComponent(confirmarSenhaCampo)
+                            .addComponent(confirmarSenhaCampo, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
                             .addComponent(senhaCampo)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,9 +260,30 @@ public class CadastroTaxista extends javax.swing.JFrame {
                                 .addComponent(emailCampo, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(placaCampo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(enderecoCampo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nomeCampo, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(nomeCampo, javax.swing.GroupLayout.Alignment.LEADING))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Criar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(77, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,21 +321,28 @@ public class CadastroTaxista extends javax.swing.JFrame {
                     .addComponent(confirmarSenhaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirmar)
-                    .addComponent(limpar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Criar)
+                    .addComponent(Excluir)
+                    .addComponent(Editar)
+                    .addComponent(Limpar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscar)
+                    .addComponent(txtLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
+    private void CriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CriarActionPerformed
 
         try {
-
             Taxista taxista = new Taxista();
-            
             taxista.setNome(nomeCampo.getText());
             taxista.setEndereço(enderecoCampo.getText());
             taxista.setTelefone(telefoneCampo.getText());
@@ -272,9 +350,8 @@ public class CadastroTaxista extends javax.swing.JFrame {
             taxista.setPlaca(placaCampo.getText());
             taxista.setSenha(senhaCampo.getPassword());
             taxista.setConfirmarSenha(confirmarSenhaCampo.getPassword());
-            
             TaxistaDAO taxistaDAO = new TaxistaDAO();
-            
+           // System.out.println("X");
             Connection con = ConnectBD.getConnnection();
             /*// Validação do campo Nome
             if (nomeCampo.getText().equals("")) {
@@ -328,10 +405,11 @@ public class CadastroTaxista extends javax.swing.JFrame {
                 stmt.setString(6, senhaCampo.getText());
 
                 stmt.executeUpdate();
-                //fecha comando conexão
-                stmt.close();
-                con.close();
-                JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso");
+               
+             //fecha comando conexão             
+           //  stmt.close();
+             con.close();
+              JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso");
             }else{
                 JOptionPane.showMessageDialog(null,taxistaDAO.ehValidoParaInclusão(taxista));
             }
@@ -340,9 +418,9 @@ public class CadastroTaxista extends javax.swing.JFrame {
             throw new RuntimeException(e);
         }
 
-    }//GEN-LAST:event_confirmarActionPerformed
+    }//GEN-LAST:event_CriarActionPerformed
 
-    private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
+    private void LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparActionPerformed
         // TODO add your handling code here:
         nomeCampo.setText(null);
         enderecoCampo.setText(null);
@@ -351,11 +429,115 @@ public class CadastroTaxista extends javax.swing.JFrame {
         placaCampo.setText(null);
         senhaCampo.setText(null);
         confirmarSenhaCampo.setText(null);
-    }//GEN-LAST:event_limparActionPerformed
+    }//GEN-LAST:event_LimparActionPerformed
 
     private void telefoneCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneCampoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefoneCampoActionPerformed
+
+    private void PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarActionPerformed
+    
+    }//GEN-LAST:event_PesquisarActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+                  // PESQUISAR / SELECIONAR
+         try {
+            Connection con2 = ConnectBD.getConnnection();
+            String query2 = "SELECT * FROM cadastro WHERE placa= ?";
+            
+            PreparedStatement stmt2;
+            stmt2 = con2.prepareStatement(query2);
+            stmt2.setString(1, Pesquisar.getText());  
+            ResultSet rs;
+            rs= stmt2.executeQuery();
+            //modelo da tabela
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0);    
+                    
+                    
+            while(rs.next()){
+                model.addRow (
+                        new Object[] {
+                            rs.getString("id"),
+                            rs.getString("nome"),
+                            rs.getString("endereco"),
+                            rs.getString("telefone"),
+                            rs.getString("email"),
+                            rs.getString("placa"),  
+                            rs.getString("senha"),
+                        }
+                );
+                
+                
+            }
+            
+            //stmt2.close();
+            con2.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroTaxista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
+        // DELETAR / EXCLUIR
+        try {
+            // TODO add your handling code here:
+             Connection con = ConnectBD.getConnnection();
+             
+             String query = "DELETE FROM cadastro WHERE nome= ? ";
+             
+             PreparedStatement stmt = con.prepareStatement(query);
+             
+             String index;
+             index = (String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0);
+             //JOptionPane.showMessageDialog(null,"Valor do codigo"+index);
+             stmt.setString(1, index);
+             stmt.executeUpdate();
+             
+        // UPDATE DADOS
+            String query2 = "SELECT * FROM cadastro WHERE nome= ?";
+            
+            PreparedStatement stmt2;
+            stmt2 = con.prepareStatement(query2);
+            stmt2.setString(1, Pesquisar.getText());  
+            
+            ResultSet rs;
+            rs= stmt2.executeQuery();
+            //modelo da tabela
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0);    
+                    
+                    
+            while(rs.next()){
+                model.addRow (
+                        new Object[] {
+                            rs.getString("id"),
+                            rs.getString("nome"),
+                            rs.getString("endereco"),
+                            rs.getString("telefone"),
+                            rs.getString("email"),
+                            rs.getString("placa"),  
+                            rs.getString("senha"),
+                        }
+                );
+                
+                
+            }
+             
+             
+             
+        } catch (SQLException ex) {
+            System.err.printf("Ocorreu erro de SQL:" +ex.getMessage());
+        }
+    }//GEN-LAST:event_ExcluirActionPerformed
+
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        // EDITAR
+        
+        
+        
+    }//GEN-LAST:event_EditarActionPerformed
 
     public static void main(String args[]) {
 
@@ -367,8 +549,13 @@ public class CadastroTaxista extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Buscar;
+    private javax.swing.JButton Criar;
+    private javax.swing.JButton Editar;
+    private javax.swing.JButton Excluir;
+    private javax.swing.JButton Limpar;
+    private javax.swing.JTextField Pesquisar;
     private javax.swing.JLabel cadastroTaxistaTexto;
-    private javax.swing.JButton confirmar;
     private javax.swing.JPasswordField confirmarSenhaCampo;
     private javax.swing.JLabel confirmarSenhaTexto;
     private javax.swing.JTextField emailCampo;
@@ -379,7 +566,8 @@ public class CadastroTaxista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton limpar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField nomeCampo;
     private javax.swing.JLabel nomeTexto;
     private javax.swing.JLabel observacao;
@@ -389,5 +577,6 @@ public class CadastroTaxista extends javax.swing.JFrame {
     private javax.swing.JLabel senhaTexto;
     private javax.swing.JTextField telefoneCampo;
     private javax.swing.JLabel telefoneTexto;
+    private javax.swing.JLabel txtLabel;
     // End of variables declaration//GEN-END:variables
 }

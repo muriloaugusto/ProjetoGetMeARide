@@ -443,7 +443,7 @@ public class CadastroTaxista extends javax.swing.JFrame {
                   // PESQUISAR / SELECIONAR
          try {
             Connection con2 = ConnectBD.getConnnection();
-            String query2 = "SELECT * FROM cadastro WHERE placa= ?";
+            String query2 = "SELECT * FROM cadastro WHERE placa=?";
             
             PreparedStatement stmt2;
             stmt2 = con2.prepareStatement(query2);

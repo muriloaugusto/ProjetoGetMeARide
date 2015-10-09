@@ -194,13 +194,12 @@ public class ConsultaTaxistas extends javax.swing.JFrame {
         // EDITAR
         TaxistaDAO daotaxi2 = new TaxistaDAO();
         String nome, endereco, email,telefone, placa,senha;
-        nome = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),1);
-        endereco = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),2);
-        email = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),3);
-        telefone = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),4);
-        placa = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),5);
-        senha = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),6);
-        daotaxi2.atualizaBD(nome,endereco,email,telefone,placa,senha);
+        nome = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),0);
+        endereco = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),1);
+        email = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),2);
+        telefone = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),3);
+        placa = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),4);
+        daotaxi2.atualizaBD(nome,endereco,email,telefone,placa);
  }//GEN-LAST:event_EditarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
@@ -210,7 +209,7 @@ public class ConsultaTaxistas extends javax.swing.JFrame {
         String s2 = Pesquisar.getText();
         try {
             String index;
-            index = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(), 1);
+            index = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(), 4);
             daotaxi.RemoveBD(index);
 
             // UPDATE DADOS

@@ -7,7 +7,7 @@ package entity;
 
 /**
  *
- * @author ricardo
+ * @author Ricardo e Murilo
  */
 public class Pessoa {
     
@@ -35,14 +35,14 @@ public class Pessoa {
     /**
      * @return the endereço
      */
-    public String getEndereço() {
+    public String getEndereco() {
         return endereço;
     }
 
     /**
      * @param endereço the endereço to set
      */
-    public void setEndereço(String endereço) {
+    public void setEndereco(String endereço) {
         this.endereço = endereço;
     }
 
@@ -84,7 +84,7 @@ public class Pessoa {
     /**
      * @param senha the senha to set
      */
-    public void setSenha(char[] senha) {
+    public void setSenha(String senha) {
         this.senha = senha.toString();
     }
 
@@ -98,7 +98,7 @@ public class Pessoa {
     /**
      * @param confirmarSenha the confirmarSenha to set
      */
-    public void setConfirmarSenha(char[] confirmarSenha) {
+    public void setConfirmarSenha(String confirmarSenha) {
         this.confirmarSenha = confirmarSenha.toString();
     }
     

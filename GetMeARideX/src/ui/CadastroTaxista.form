@@ -66,15 +66,13 @@
                           <Component id="nomeTexto" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="observacao" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="telefoneCampo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="emailCampo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="placaCampo" alignment="0" min="-2" pref="227" max="-2" attributes="0"/>
-                              <Component id="enderecoCampo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="nomeCampo" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="telefoneCampo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="emailCampo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="placaCampo" alignment="0" pref="227" max="32767" attributes="0"/>
+                          <Component id="enderecoCampo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="nomeCampo" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -91,9 +89,9 @@
                               <Component id="Criar" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Excluir" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="Editar" min="-2" pref="73" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="Limpar" min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -229,7 +227,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="placaCampo">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;javax.swing.text.MaskFormatter placa= new javax.swing.text.MaskFormatter(&quot;UUU-####&quot;); &#xd;&#xa;placaCampo = new javax.swing.JFormattedTextField(placa); &#xd;&#xa;} &#xd;&#xa;catch (Exception e){ &#xd;&#xa;} "/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;javax.swing.text.MaskFormatter placa= new javax.swing.text.MaskFormatter(&quot;UUUUU-####&quot;); &#xd;&#xa;placaCampo = new javax.swing.JFormattedTextField(placa); &#xd;&#xa;} &#xd;&#xa;catch (Exception e){ &#xd;&#xa;} "/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="senhaTexto">
@@ -346,7 +344,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Buscar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pesquisar"/>
+        <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarActionPerformed"/>
@@ -371,6 +369,9 @@
               </Table>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -378,6 +379,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PesquisarActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="txtLabel">
       <Properties>

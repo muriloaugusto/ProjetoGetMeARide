@@ -33,13 +33,13 @@ public class TaxistaDAO {
          
             if (ehValidoParaInclusão(taxista).isEmpty()) {
                 
-                String query = "INSERT INTO cadastro (nome,endereco,email,telefone,placa,senha) VALUES (?,?,?,?,?,?)";
+                String query = "INSERT INTO cadastro (nome,endereco,telefone,email,placa,senha) VALUES (?,?,?,?,?,?)";
 
                 PreparedStatement stmt = con.prepareStatement(query);
                 stmt.setString(1, taxista.getNome());
                 stmt.setString(2, taxista.getEndereco());
-                stmt.setString(3, taxista.getEmail());
-                stmt.setString(4, taxista.getTelefone());
+                stmt.setString(3, taxista.getTelefone());
+                stmt.setString(4, taxista.getEmail());
                 stmt.setString(5, taxista.getPlaca());
                 stmt.setString(6, taxista.getSenha());
 
@@ -97,12 +97,12 @@ public class TaxistaDAO {
         ConsultaTaxistas consultaTaxistas = new ConsultaTaxistas();
         try {             
             com.mysql.jdbc.Connection con = (com.mysql.jdbc.Connection) ConnectBD.getConnnection();
-            String query = "UPDATE cadastro set nome=?,endereco=?,email=?,telefone=?,placa=? WHERE placa= ? ";
+            String query = "UPDATE cadastro set nome=?,endereco=?,telefone=?,email=?,placa=? WHERE placa= ? ";
             com.mysql.jdbc.PreparedStatement stmt = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
             stmt.setString(1, nome);
             stmt.setString(2, endereco);
-            stmt.setString(3, email);
-            stmt.setString(4, telefone);
+            stmt.setString(3, telefone);
+            stmt.setString(4, email);
             stmt.setString(5, placa);
             stmt.setString(6, placa);
            

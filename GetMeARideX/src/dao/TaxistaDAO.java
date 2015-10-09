@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ui.CadastroTaxista;
-import ui.ConsultaTaxista;
+import ui.ConsultaTaxistas;
 
 /**
  *
@@ -57,73 +57,64 @@ public class TaxistaDAO {
         }
     }
     
-    public void PesquisaBD (){
+    public ResultSet PesquisaBD (String pesquisa){
     // PESQUISAR / SELECIONAR     
        ResultSet rs = null;
        try {
-            ConsultaTaxista daoConsulta = new ConsultaTaxista();
+            ConsultaTaxistas daoConsulta = new ConsultaTaxistas();
             Connection con2 = ConnectBD.getConnnection();
             String query2 = "SELECT * FROM cadastro WHERE nome = ? ";
             PreparedStatement stmt2;
             stmt2 = con2.prepareStatement(query2);
-            stmt2.setString(1, daoConsulta.Pesquisar.getText());
+            stmt2.setString(1,pesquisa);
             rs= stmt2.executeQuery();
-            //modelo da tabela
-            DefaultTableModel model = (DefaultTableModel) daoConsulta.jTableConsulta.getModel();
-            model.setNumRows(0);    
+            return rs;
   
-            while(rs.next()){
-                model.addRow (
-                        new Object[] {
-                            rs.getString("id"),
-                            rs.getString("nome"),
-                            rs.getString("endereco"),
-                            rs.getString("telefone"),
-                            rs.getString("email"),
-                            rs.getString("placa"),  
-                            rs.getString("senha"),
-                        }
-                );
-           
-            }
+            
                   
         } catch (SQLException ex) {
             Logger.getLogger(CadastroTaxista.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("ERRO aqui");
         }
-       
-            /*PreparedStatement stmt2;
-            stmt2 = con2.prepareStatement(query2);
-            stmt2.setString(1, daoConsulta.Pesquisar.getText());  
-            ResultSet rs;
-            rs= stmt2.executeQuery();
-            
-            //modelo da tabela
-            DefaultTableModel model = (DefaultTableModel) daoConsulta.jTableConsulta.getModel();
-            model.setNumRows(0);    
-  
-            while(rs.next()){
-                model.addRow (
-                        new Object[] {
-                            rs.getString("id"),
-                            rs.getString("nome"),
-                            rs.getString("endereco"),
-                            rs.getString("telefone"),
-                            rs.getString("email"),
-                            rs.getString("placa"),  
-                            rs.getString("senha"),
-                        }
-                );
-           
-            }
-            stmt2.close();
-            con2.close(); 
-            * /*/
-     
+       return rs;
+    }
+    public void RemoveBD (String index){
+    // DELETAR / EXCLUIR
+        try {             
+            com.mysql.jdbc.Connection con = (com.mysql.jdbc.Connection) ConnectBD.getConnnection();
+            String query = "DELETE FROM cadastro WHERE nome= ? ";
+            com.mysql.jdbc.PreparedStatement stmt = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            stmt.setString(1, index);
+            stmt.executeUpdate();        
+        } catch (SQLException ex) {
+            System.err.printf("Ocorreu erro de SQL:" +ex.getMessage());
+        }
     
-   
     
     }
+    public void atualizaBD (String nome,String endereco, String email,String telefone,String placa, String senha){
+    // UPDATE 
+        ConsultaTaxistas consultaTaxistas = new ConsultaTaxistas();
+        try {             
+            com.mysql.jdbc.Connection con = (com.mysql.jdbc.Connection) ConnectBD.getConnnection();
+            String query = "UPDATE cadastro set nome=?,endereco=?,email=?,telefone=?,placa=?,senha=? WHERE placa= ? ";
+            com.mysql.jdbc.PreparedStatement stmt = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            stmt.setString(1, nome);
+            stmt.setString(2, endereco);
+            stmt.setString(3, email);
+            stmt.setString(4, telefone);
+            stmt.setString(5, placa);
+            stmt.setString(6, senha);
+            stmt.setString(7, placa);
+            stmt.executeUpdate();        
+        } catch (SQLException ex) {
+            System.err.printf("Ocorreu erro de SQL:" +ex.getMessage());
+        }
+    
+    
+    }
+    
+    
     public ArrayList<String> ehValidoParaInclusão(Taxista taxista) {
 
         ArrayList<String> erros = new ArrayList<String>();

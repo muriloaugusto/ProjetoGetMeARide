@@ -206,8 +206,8 @@ public class ConsultaTaxistas extends javax.swing.JFrame {
         String nome, endereco, email,telefone, placa,senha;
         nome = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),0);
         endereco = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),1);
-        email = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),2);
-        telefone = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),3);
+        email = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),3);
+        telefone = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),2);
         placa = (String) jTableConsulta.getModel().getValueAt(jTableConsulta.getSelectedRow(),4);
         daotaxi2.atualizaBD(nome,endereco,email,telefone,placa);
  }//GEN-LAST:event_EditarActionPerformed

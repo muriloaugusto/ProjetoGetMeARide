@@ -42,6 +42,17 @@ public class CadastroTaxista extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void limpaTela() {
+        // TODO add your handling code here:
+        nomeCampo.setText(null);
+        enderecoCampo.setText(null);
+        emailCampo.setText(null);
+        telefoneCampo.setText(null);
+        placaCampo.setText(null);
+        senhaCampo.setText(null);
+        confirmarSenhaCampo.setText(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -287,17 +298,11 @@ public class CadastroTaxista extends javax.swing.JFrame {
             taxista.setSenha(senhaCampo.getText());
             taxista.setConfirmarSenha(confirmarSenhaCampo.getText());
             taxi.salvaBD(taxista);
+            limpaTela();
     }//GEN-LAST:event_CriarActionPerformed
 
     private void LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparActionPerformed
-        // TODO add your handling code here:
-        nomeCampo.setText(null);
-        enderecoCampo.setText(null);
-        emailCampo.setText(null);
-        telefoneCampo.setText(null);
-        placaCampo.setText(null);
-        senhaCampo.setText(null);
-        confirmarSenhaCampo.setText(null);
+        limpaTela();
     }//GEN-LAST:event_LimparActionPerformed
 
     private void telefoneCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneCampoActionPerformed

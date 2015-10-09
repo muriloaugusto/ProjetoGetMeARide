@@ -69,9 +69,8 @@ public class TaxistaDAO {
             stmt2.setString(1,pesquisa);
             rs= stmt2.executeQuery();
             return rs;
-  
             
-                  
+                            
         } catch (SQLException ex) {
             Logger.getLogger(CadastroTaxista.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("ERRO PESQUISAR");
@@ -97,7 +96,7 @@ public class TaxistaDAO {
         ConsultaTaxistas consultaTaxistas = new ConsultaTaxistas();
         try {             
             com.mysql.jdbc.Connection con = (com.mysql.jdbc.Connection) ConnectBD.getConnnection();
-            String query = "UPDATE cadastro set nome=?,endereco=?,telefone=?,email=?,placa=? WHERE placa= ? ";
+            String query = "UPDATE cadastro set nome=?,endereco=?,telefone=?,email=?,placa=? WHERE placa=? ";
             com.mysql.jdbc.PreparedStatement stmt = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
             stmt.setString(1, nome);
             stmt.setString(2, endereco);
@@ -139,9 +138,10 @@ public class TaxistaDAO {
             erros.add("Endereço inválido");
         }
         
-        if (taxista.getPlaca().equals("   -    ") ) {
+        if (taxista.getPlaca().equals("   -    ")  ) {
             erros.add("Placa inválida");
         }
+        
 
         if (taxista.getTelefone().equals("(  )     -    ")) {
             erros.add("Telefone inválido");

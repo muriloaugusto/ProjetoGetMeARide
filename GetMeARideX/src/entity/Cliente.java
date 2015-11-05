@@ -10,7 +10,25 @@ package entity;
  * @author ricardo
  */
 public class Cliente extends Pessoa {
-    /*
-     * nao editar por enquanto
+     private String CPF;
+    
+    public Cliente(){
+        CPF = "";
+    }
+
+    /**
+     * @return the placa
      */
+    public String getCPF() {
+        return CPF;
+    }
+
+    /**
+     * @param placa the placa to set
+     */
+    public void setCPF(String placa) {
+        this.CPF = placa;
+    }
+    
+  
 }

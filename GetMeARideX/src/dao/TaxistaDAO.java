@@ -33,7 +33,7 @@ public class TaxistaDAO {
          
             if (ehValidoParaInclusão(taxista).isEmpty()) {
                 
-                String query = "INSERT INTO cadastro (nome,endereco,telefone,email,placa,senha) VALUES (?,?,?,?,?,?)";
+                String query = "INSERT INTO cadastrotaxista (nome,endereco,telefone,email,placa,senha) VALUES (?,?,?,?,?,?)";
 
                 PreparedStatement stmt = con.prepareStatement(query);
                 stmt.setString(1, taxista.getNome());
@@ -63,7 +63,7 @@ public class TaxistaDAO {
        try {
             ConsultaTaxistas daoConsulta = new ConsultaTaxistas();
             Connection con2 = ConnectBD.getConnnection();
-            String query2 = "SELECT * FROM cadastro WHERE placa = ? ";
+            String query2 = "SELECT * FROM cadastrotaxista WHERE placa = ? ";
             PreparedStatement stmt2;
             stmt2 = con2.prepareStatement(query2);
             stmt2.setString(1,pesquisa);
@@ -77,11 +77,49 @@ public class TaxistaDAO {
         }
        return rs;
     }
+    
+    public ResultSet retornaBD (){
+    // PESQUISAR / SELECIONAR     
+       ResultSet rs = null;
+       try {
+            ConsultaTaxistas daoConsulta = new ConsultaTaxistas();
+            Connection con2 = ConnectBD.getConnnection();
+            String query2 = "SELECT * FROM cadastrotaxista";
+            PreparedStatement stmt2;
+            stmt2 = con2.prepareStatement(query2);
+         //   stmt2.setString(1,pesquisa);
+            rs= stmt2.executeQuery();
+            //return rs;
+            // Colocar em um array List
+            ArrayList<String> taxista = new ArrayList();
+            while (rs.next()) {
+                          
+                            taxista.add(rs.getString("nome"));
+                            taxista.add(rs.getString("endereco"));
+                            taxista.add(rs.getString("telefone"));
+                            taxista.add(rs.getString("email"));
+                            taxista.add(rs.getString("placa"));
+                            taxista.add(rs.getString("senha"));
+                                               
+            }
+            for (int i = 0; i < taxista.size(); i++) { 
+                System.out.println(taxista.get(i));  
+            }
+                              
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroTaxista.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("ERRO PESQUISAR");
+        }
+       return rs;
+    }
+    
+    
+    
     public void RemoveBD (String index){
     // DELETAR / EXCLUIR
         try {             
             com.mysql.jdbc.Connection con = (com.mysql.jdbc.Connection) ConnectBD.getConnnection();
-            String query = "DELETE FROM cadastro WHERE placa= ? ";
+            String query = "DELETE FROM cadastrotaxista WHERE placa= ? ";
             com.mysql.jdbc.PreparedStatement stmt = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
             stmt.setString(1, index);
             stmt.executeUpdate();        
@@ -96,7 +134,7 @@ public class TaxistaDAO {
         ConsultaTaxistas consultaTaxistas = new ConsultaTaxistas();
         try {             
             com.mysql.jdbc.Connection con = (com.mysql.jdbc.Connection) ConnectBD.getConnnection();
-            String query = "UPDATE cadastro set nome=?,endereco=?,telefone=?,email=?,placa=? WHERE placa=? ";
+            String query = "UPDATE cadastrotaxista set nome=?,endereco=?,telefone=?,email=?,placa=? WHERE placa=? ";
             com.mysql.jdbc.PreparedStatement stmt = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
             stmt.setString(1, nome);
             stmt.setString(2, endereco);

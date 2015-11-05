@@ -51,6 +51,7 @@ public class CadastroTaxista extends javax.swing.JFrame {
         placaCampo.setText(null);
         senhaCampo.setText(null);
         confirmarSenhaCampo.setText(null);
+        
     }
 
     /**
@@ -303,6 +304,8 @@ public class CadastroTaxista extends javax.swing.JFrame {
 
     private void LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparActionPerformed
         limpaTela();
+        TaxistaDAO daotaxi = new TaxistaDAO();
+        daotaxi.retornaBD();
     }//GEN-LAST:event_LimparActionPerformed
 
     private void telefoneCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneCampoActionPerformed

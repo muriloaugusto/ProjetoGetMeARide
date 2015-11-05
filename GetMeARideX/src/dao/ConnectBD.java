@@ -13,7 +13,7 @@ public class ConnectBD {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Conectado!");
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/cadastrotaxista","root","");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/cadastroGetMeARide","root","");
             
          } catch (ClassNotFoundException ex) {
           throw new SQLException(ex.getMessage());

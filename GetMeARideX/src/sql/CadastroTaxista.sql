@@ -1,6 +1,6 @@
 
 
-CREATE  TABLE IF NOT EXISTS cadastrotaxista.cadastro(
+CREATE  TABLE IF NOT EXISTS CadastroGetMeARide.cadastroTaxista(
 
   nome VARCHAR(50) NULL DEFAULT NULL ,
 

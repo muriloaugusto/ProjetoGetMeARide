@@ -9,7 +9,7 @@ import entity.Veiculo;
 
 /**
  *
- * @author SYSTEM
+ * @author MURILO
  */
 public class CadastroVeiculo extends javax.swing.JFrame {
 

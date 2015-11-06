@@ -10,7 +10,8 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author SYSTEM
+ * @author MURILO
+ * 
  */
 public class ConsultaVeiculo extends javax.swing.JFrame {
 

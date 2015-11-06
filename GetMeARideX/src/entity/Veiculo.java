@@ -6,7 +6,7 @@ package entity;
 
 /**
  *
- * @author SYSTEM
+ * @author MURILO
  */
 public class Veiculo {
     private String carro;

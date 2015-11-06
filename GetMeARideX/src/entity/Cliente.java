@@ -26,8 +26,8 @@ public class Cliente extends Pessoa {
     /**
      * @param placa the placa to set
      */
-    public void setCPF(String placa) {
-        this.CPF = placa;
+    public void setCPF(String cpf) {
+        this.CPF = cpf;
     }
     
   

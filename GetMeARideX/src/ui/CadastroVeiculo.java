@@ -228,6 +228,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         veiculo.setCor(corCampo.getText());
         veiculo.setPlaca(placaCampo.getText());
         veiculo.setRenavam(Float.parseFloat(renavamCampo.getText()));
+        
         automovel.salvaBD(veiculo);
         limpaTela();
     }//GEN-LAST:event_CriarActionPerformed
@@ -296,6 +297,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel nomeTexto;
     private javax.swing.JTextField placaCampo;
     private javax.swing.JLabel placaTexto;
-    private javax.swing.JTextField renavamCampo;
+    public javax.swing.JTextField renavamCampo;
     // End of variables declaration//GEN-END:variables
 }

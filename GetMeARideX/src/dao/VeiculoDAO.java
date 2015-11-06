@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ui.CadastroTaxista;
 import ui.ConsultaTaxistas;
+import ui.CadastroVeiculo;
 
 /**
  *
@@ -118,7 +119,7 @@ public class VeiculoDAO {
 
         ArrayList<String> erros = new ArrayList<String>();
         
-
+        CadastroVeiculo v = new CadastroVeiculo();
         Pattern pattern = Pattern.compile("[0-9]");
         Matcher match = pattern.matcher(veiculo.getCarro());
 
@@ -138,7 +139,7 @@ public class VeiculoDAO {
             erros.add("Cor vazia");
         }
         
-         if (Float.toString(veiculo.getRenavam()).equals("")) {
+         if (v.renavamCampo.getText().equals("")) {
             erros.add("Renavam vazio");
         }
         return erros;
